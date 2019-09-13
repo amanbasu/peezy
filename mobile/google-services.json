@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "154614142063",
+    "firebase_url": "https://gradhack.firebaseio.com",
+    "project_id": "gradhack",
+    "storage_bucket": "gradhack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154614142063:android:6564549cea399b5f53699a",
+        "android_client_info": {
+          "package_name": "com.apposite.weartest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154614142063-vepop3nmtmjc0htkdn0gubtm5igo3m6e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apposite.weartest",
+            "certificate_hash": "bbd72466d7264c9a826c65e444be23590063645f"
+          }
+        },
+        {
+          "client_id": "154614142063-of15bmk9nuumbuvkqab6aolfartssk9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWuYjHf1Zp_udIxCQXIB4VA9IgVOmE0rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154614142063-of15bmk9nuumbuvkqab6aolfartssk9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

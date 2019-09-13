@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Peezy</string>
     <string name="listen">Listen</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid email</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="title_activity_user_detail">UserDetailActivity</string>
+    <string name="name">Name</string>
+    <string name="uid">UID</string>
+    <string name="email">email</string>
+    <string name="peezy">\@peezy</string>
+    <string name="security">Security</string>
+    <string name="save">Save</string>
+    <string name="set_up">set up</string>
+    <string name="_12345">12345</string>
+    <string name="john_doe">John Doe</string>
+    <string name="title_activity_qr_code_scanner">QrCodeScanner</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>

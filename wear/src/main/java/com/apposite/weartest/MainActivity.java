@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -15,33 +17,21 @@ import androidx.annotation.NonNull;
 
 public class MainActivity extends WearableActivity {
 
-    private TextView mTextView;
+    private SignInButton googleSignIn;
     public String TAG = "log message";
+
+    private GoogleSignInClient mGoogleSignInClient;
+    private final int RC_SIGN_IN = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = findViewById(R.id.text);
-
         // Enables Always-on
         setAmbientEnabled();
 
-        Fitness.getRecordingClient(this, GoogleSignIn.getLastSignedInAccount(this))
-                .subscribe(DataType.TYPE_ACTIVITY_SEGMENT)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i(TAG, "Successfully subscribed!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i(TAG, "There was a problem subscribing.");
-                    }
-                });
+
 
     }
 }

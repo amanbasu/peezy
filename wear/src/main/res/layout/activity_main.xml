@@ -12,14 +12,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+        android:padding="@dimen/inner_frame_layout_padding">
 
-        <TextView
-            android:id="@+id/text"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnGoogleSignIn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>

@@ -4,25 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnSendRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#EEDFFD"
         android:text="@string/listen"
-        app:layout_constraintBottom_toTopOf="@+id/tvResponse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvResponse"
-        android:layout_width="366dp"
-        android:layout_height="203dp"
-        android:textSize="24sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAddPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#EEDFFD"
+        android:text="Add Friend"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.593"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/btnShowProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#EEDFFD"
+        android:text="Profile"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.683"
+        android:padding="10dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="366dp"
+        android:layout_height="203dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSendRequest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/tvResponse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="monospace"
+            android:text="Whom would you like to pay today? Just say it out!"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
