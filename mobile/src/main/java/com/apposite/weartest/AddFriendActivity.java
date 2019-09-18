@@ -1,10 +1,24 @@
 package com.apposite.weartest;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -16,27 +30,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class InfoActivity extends AppCompatActivity {
+public class AddFriendActivity extends AppCompatActivity {
 
     EditText name, uid;
     Button save;
-    ImageButton scanQR;
+    ImageButton scanQR, micName, micUid;
 
     private DatabaseReference mDatabase;
 
@@ -49,16 +50,20 @@ public class InfoActivity extends AppCompatActivity {
 
     private final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     private final int QR_REQUEST_CODE = 3;
+    private final int MIC_NAME_REQUEST_CODE = 4;
+    private final int MIC_UID_REQUEST_CODE = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_add_friend);
 
         name = findViewById(R.id.etFriendName);
         uid = findViewById(R.id.etFriendUId);
         save = findViewById(R.id.btnSaveFriend);
         scanQR = findViewById(R.id.ibScanQR);
+        micName = findViewById(R.id.ibMicName);
+        micUid = findViewById(R.id.ibMicUid);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -67,10 +72,8 @@ public class InfoActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("USER_INFO_PREF", 0);
         myUId = sharedPref.getString("uid", "");
 
-
         uid.addTextChangedListener(new TextWatcher() {
 
-            // TODO: QR Code Scanner
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -123,6 +126,34 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkCameraPermission();
+            }
+        });
+
+        micName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String DIALOG_TEXT = "Speech recognition demo";
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, DIALOG_TEXT);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, MIC_NAME_REQUEST_CODE);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
+                startActivityForResult(intent, MIC_NAME_REQUEST_CODE);
+            }
+        });
+
+        micUid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String DIALOG_TEXT = "Speech recognition demo";
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, DIALOG_TEXT);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, MIC_UID_REQUEST_CODE);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
+                startActivityForResult(intent, MIC_UID_REQUEST_CODE);
             }
         });
     }
@@ -201,8 +232,9 @@ public class InfoActivity extends AppCompatActivity {
                 validUId = true;
                 for(DataSnapshot data: dataSnapshot.getChildren()){
                     Log.d(TAG, "checking sub data " + data.getValue().toString());
-                    HashMap<String, String> friendData = (HashMap<String, String>) data.getValue();
-                    if (friendData.get("uid").equals(uidVal)) {
+                    Friends friendData = data.getValue(Friends.class);
+
+                    if (friendData.getUid().equals(uidVal)) {
                         validUId = false;
                         uid.setError("The given UId already belongs to a friend.");
                         break;
@@ -252,6 +284,7 @@ public class InfoActivity extends AppCompatActivity {
                         uid.setText("");
                         name.setText("");
                         Toast.makeText(getApplicationContext(), mName + " added to your friends.", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -267,8 +300,29 @@ public class InfoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == QR_REQUEST_CODE){
-            String uidVal = data.getStringExtra("SCAN_RESULT");
-            uid.setText(uidVal);
+            try {
+                String uidVal = data.getStringExtra("SCAN_RESULT");
+                uid.setText(uidVal);
+            }
+            catch (Exception e){
+
+            }
         }
+
+        ArrayList<String> speech;
+        if (resultCode == RESULT_OK) {
+            if (requestCode == MIC_NAME_REQUEST_CODE) {
+                speech = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                name.setText(speech.get(0));
+                //you can set resultSpeech to your EditText or TextView
+            } else if (requestCode == MIC_UID_REQUEST_CODE) {
+                speech = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                String temp_uid = speech.get(0);
+                temp_uid = temp_uid.replaceAll("\\s+","");
+                uid.setText(temp_uid);
+                //you can set resultSpeech to your EditText or TextView
+            }
+        }
+
     }
 }

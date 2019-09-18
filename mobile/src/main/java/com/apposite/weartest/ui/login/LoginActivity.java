@@ -1,54 +1,34 @@
 package com.apposite.weartest.ui.login;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.biometric.BiometricPrompt;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apposite.weartest.AccountActivity;
 import com.apposite.weartest.MainActivity;
 import com.apposite.weartest.R;
-import com.apposite.weartest.UserDetailActivity;
-import com.apposite.weartest.ui.login.LoginViewModel;
-import com.apposite.weartest.ui.login.LoginViewModelFactory;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.Random;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -124,21 +104,86 @@ public class LoginActivity extends AppCompatActivity {
         if (account != null){
             Log.i(TAG, "Google Sign In successful");
 
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("USER_INFO_PREF", 0);
+            final ProgressDialog pd = new ProgressDialog(this);
+            pd.setMessage("Authenticating your ECG...");
+            pd.show();
 
-            String uid = sharedPref.getString("uid", "");
-            Log.d(TAG, "SP data: " + uid);
-            if (!uid.equals("")){
-                Log.d(TAG, "data found in Shared preference");
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            } else {
-                Log.d(TAG, "data not found in shared preference");
-                startActivity(new Intent(getApplicationContext(), UserDetailActivity.class));
-            }
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
 
-            finish();
+                    final int random = new Random().nextInt(2);
+                    pd.dismiss();
+
+                    if(random>0) doBiometricAuth();
+                    else goIn();
+                }
+            }, 3000);
         } else {
             Toast.makeText(getApplicationContext(), "Sign in failed!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void goIn(){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("USER_INFO_PREF", 0);
+
+        String uid = sharedPref.getString("uid", "");
+        Log.d(TAG, "SP data: " + uid);
+        if (!uid.equals("")){
+            Log.d(TAG, "data found in Shared preference");
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        } else {
+            Log.d(TAG, "data not found in shared preference");
+            startActivity(new Intent(getApplicationContext(), AccountActivity.class));
+        }
+
+        finish();
+    }
+
+    private void doBiometricAuth() {
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Authentication");
+        alertDialog.setMessage("ECG not found.\nPlease verify your identity.");
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
+
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Authentication")
+                .setDescription("ECG not found.\nPlease verify your identity.")
+                .setNegativeButtonText("Cancel")
+                .build();
+
+        final BiometricPrompt myBiometricPrompt = new BiometricPrompt(this,
+                Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
+
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
+                    finish();
+                } else {
+                    Log.d(TAG, "An unrecoverable error occurred");
+                }
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Log.d(TAG, "Fingerprint recognised successfully");
+                alertDialog.dismiss();
+                goIn();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Log.d(TAG, "Fingerprint not recognised");
+            }
+
+        });
+
+        myBiometricPrompt.authenticate(promptInfo);
     }
 }

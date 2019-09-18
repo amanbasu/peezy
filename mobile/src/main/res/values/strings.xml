@@ -16,11 +16,13 @@
     <string name="uid">UID</string>
     <string name="email">email</string>
     <string name="peezy">\@peezy</string>
-    <string name="security">Security</string>
+    <string name="security">ECG security</string>
     <string name="save">Save</string>
     <string name="set_up">set up</string>
     <string name="_12345">12345</string>
     <string name="john_doe">John Doe</string>
     <string name="title_activity_qr_code_scanner">QrCodeScanner</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="greeting">Whom would you like to pay today? Just say it out!</string>
 </resources>

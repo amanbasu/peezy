@@ -5,18 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".ProfileActivity">
+    tools:context=".QuickPayActivity">
 
-    <ImageView
-        android:id="@+id/ivQRPreview"
-        android:layout_width="275dp"
-        android:layout_height="275dp"
+    <Button
+        android:id="@+id/btnQPPay"
+        android:layout_width="85dp"
+        android:layout_height="39dp"
+        android:background="#FBDC7F"
+        android:text="PAY"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#362A29"
+        android:textSize="24sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.703" />
+
+    <EditText
+        android:id="@+id/etQPUid"
+        android:layout_width="277dp"
+        android:layout_height="55dp"
+        android:layout_margin="40dp"
+        android:fontFamily="monospace"
+        android:hint="1235@peezy"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.258" />
+
+    <EditText
+        android:id="@+id/etQPAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="10.00"
+        android:inputType="numberDecimal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnQPPay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etQPUid"
+        app:layout_constraintVertical_bias="0.486" />
+
+    <ImageButton
+        android:id="@+id/ibQPMicAmount"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.497"
+        app:srcCompat="@drawable/news_report" />
+
+    <ImageButton
+        android:id="@+id/ibQPScanQR"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.284"
+        app:srcCompat="@drawable/scan" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +128,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="openFriendsActivity"
+            android:onClick="openFriendActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -85,8 +153,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:elevation="5dp"
             android:gravity="center"
-            android:onClick="openQuickPayActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -136,8 +204,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:elevation="5dp"
             android:gravity="center"
+            android:onClick="openProfileActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -158,36 +226,39 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvUidPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvQPUid"
+        android:layout_width="80dp"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="monospace"
-        android:text="abc@peezy"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="22sp"
+        android:text="UID"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivQRPreview"
-        app:layout_constraintVertical_bias="0.02" />
-
-    <TextView
-        android:id="@+id/tvNamePreview"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:fontFamily="monospace"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivQRPreview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.191" />
+
+    <TextView
+        android:id="@+id/tvQPAmount"
+        android:layout_width="104dp"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="124dp"
+        android:fontFamily="monospace"
+        android:text="Amount"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvQPUid"
+        app:layout_constraintVertical_bias="0.212" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

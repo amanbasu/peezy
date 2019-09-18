@@ -11,63 +11,199 @@
         android:id="@+id/btnSendRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EEDFFD"
-        android:text="@string/listen"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#000000"
+        android:background="#FBDC7F"
+        android:text="Speak"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#362A29"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAddPerson"
+        android:id="@+id/btnCancelTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EEDFFD"
-        android:text="Add Friend"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#000000"
+        android:background="#FBDC7F"
+        android:text="Dismiss"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#362A29"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593"
-        android:padding="10dp"/>
+        app:layout_constraintVertical_bias="0.581"
+        android:visibility="gone"/>
 
     <Button
-        android:id="@+id/btnShowProfile"
+        android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EEDFFD"
-        android:text="Profile"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#000000"
+        android:background="#FBDC7F"
+        android:text="Confirm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#362A29"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683"
-        android:padding="10dp"/>
+        android:visibility="gone"/>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="366dp"
-        android:layout_height="203dp"
+
+    <TextView
+        android:id="@+id/tvResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:layout_margin="15dp"
+        android:text="@string/greeting"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSendRequest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/tvResponse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="monospace"
-            android:text="Whom would you like to pay today? Just say it out!"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="24sp" />
 
-    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="13dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/wallet_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/house" />
+
+            <TextView
+                android:id="@+id/wallet_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Home"
+                android:textColor="#a6b0b9"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="openFriendActivity"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/chart_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/friendship" />
+
+            <TextView
+                android:id="@+id/chart_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Friends"
+                android:textColor="#a6b0b9"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="openQuickPayActivity"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/setting_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/scan" />
+
+            <TextView
+                android:id="@+id/setting_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Quick Pay"
+                android:textColor="#a6b0b9"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="openAccountActivity"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/trading_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/money_bag" />
+
+            <TextView
+                android:id="@+id/trading_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Account"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="openProfileActivity"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/alert_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/boy" />
+
+            <TextView
+                android:id="@+id/alert_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Profile"
+                android:textColor="#a6b0b9"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

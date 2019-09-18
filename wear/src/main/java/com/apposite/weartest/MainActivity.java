@@ -3,6 +3,7 @@ package com.apposite.weartest;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -33,5 +34,8 @@ public class MainActivity extends WearableActivity {
 
 
 
+    }
+
+    public void openFriendActivity(View view) {
     }
 }

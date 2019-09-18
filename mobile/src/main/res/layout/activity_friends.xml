@@ -4,27 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".ProfileActivity">
+    android:background="#FFFFFF"
+    tools:context=".FriendsActivity">
 
-    <ImageView
-        android:id="@+id/ivQRPreview"
-        android:layout_width="275dp"
-        android:layout_height="275dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <GridView
+            android:id="@+id/glFriendView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/add"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:onClick="openAddFriends"
+        android:src="@drawable/add"
+        app:backgroundTint="#ffffff"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:rippleColor="#ffffff" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="horizontal"
         android:padding="13dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
@@ -59,8 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
+            android:elevation="5dp"
             android:gravity="center"
-            android:onClick="openFriendsActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -136,8 +162,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:elevation="5dp"
             android:gravity="center"
+            android:onClick="openProfileActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -156,38 +182,5 @@
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvUidPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="abc@peezy"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivQRPreview"
-        app:layout_constraintVertical_bias="0.02" />
-
-    <TextView
-        android:id="@+id/tvNamePreview"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:fontFamily="monospace"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivQRPreview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

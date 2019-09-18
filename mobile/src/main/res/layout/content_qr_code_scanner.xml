@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212429"
+    android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".QrCodeScanner"
-    tools:showIn="@layout/activity_qr_code_scanner">
+    tools:context=".QrCodeScanner">
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.apposite.weartest;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,12 +13,15 @@ import com.google.zxing.common.BitMatrix;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "log_cat";
+    private int timesBackPressed = 2;
 
     private ImageView imageQR;
     private TextView name, uid;
@@ -74,5 +78,35 @@ public class ProfileActivity extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
         bitmap.setPixels(pixels, 0, 350, 0, 0, bitMatrixWidth, bitMatrixHeight);
         return bitmap;
+    }
+
+    public void openMainActivity(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    public void openFriendsActivity(View view) {
+        startActivity(new Intent(this, FriendsActivity.class));
+        finish();
+    }
+
+    public void openQuickPayActivity(View view) {
+        startActivity(new Intent(this, QuickPayActivity.class));
+        finish();
+    }
+
+    public void openAccountActivity(View view) {
+        startActivity(new Intent(this, AccountActivity.class));
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if(timesBackPressed < 1){
+            finish();
+        }
+        timesBackPressed -= 1;
+        Toast.makeText(this, "Press back one more time to exit.", Toast.LENGTH_SHORT).show();
     }
 }

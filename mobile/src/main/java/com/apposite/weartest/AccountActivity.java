@@ -1,12 +1,13 @@
 package com.apposite.weartest;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,27 +24,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserDetailActivity extends AppCompatActivity {
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class AccountActivity extends AppCompatActivity {
 
     private final String TAG = "log_cat";
 
-    EditText name, uid;
+    EditText name, uid, accNum, branchCode;
     Button save, setSecurity;
 
     private DatabaseReference mDatabase;
+    private int timesBackPressed = 2;
 
     private boolean validUId = false;
     private boolean securityDone = false;
 
-    // TODO: link bank account
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_detail);
+        setContentView(R.layout.activity_account);
 
         name = findViewById(R.id.etName);
         uid = findViewById(R.id.etUId);
+        accNum = findViewById(R.id.etAccountNo);
+        branchCode = findViewById(R.id.etBranch);
+
         save = findViewById(R.id.btnSaveUser);
         setSecurity = findViewById(R.id.btnSetSecurity);
 
@@ -74,9 +81,11 @@ public class UserDetailActivity extends AppCompatActivity {
 
                 String nameVal = name.getText().toString();
                 String uidVal = uid.getText().toString() + getString(R.string.peezy);
+                String accNumVal = accNum.getText().toString();
+                String branchCodeVal = branchCode.getText().toString();
 
                 if (securityDone && validUId) {
-                    saveDetails(nameVal, uidVal);
+                    saveDetails(nameVal, uidVal, accNumVal, branchCodeVal);
                 }
             }
         });
@@ -85,11 +94,28 @@ public class UserDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: security logic
+
+                ECGAuth ecgAuth = new ECGAuth();
+
+                showPD();
+            }
+        });
+    }
+
+    private void showPD(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Authenticating your ECG...");
+        pd.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Toast.makeText(getApplicationContext(), "You are now SECURED!", Toast.LENGTH_SHORT).show();
                 securityDone = true;
                 save.setVisibility(View.VISIBLE);
+                pd.dismiss();
             }
-        });
+        }, 3000);
     }
 
     private void checkUniqueUId(final String tempUId){
@@ -115,17 +141,27 @@ public class UserDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void saveDetails(final String nameVal, final String uidVal) {
+    private void saveDetails(final String nameVal, final String uidVal, final String accNumVal, final String branchCodeVal) {
 
         if (nameVal.equals("")){
             name.setError("Name cannot be empty.");
             return;
         }
 
+        if (accNumVal.equals("")){
+            name.setError("Account number cannot be empty.");
+            return;
+        }
+
+        if (branchCodeVal.equals("")){
+            name.setError("Branch code cannot be empty.");
+            return;
+        }
+
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("USER_INFO_PREF", 0);
         String email = sharedPref.getString(getString(R.string.email), "");
 
-        NewUser user = new NewUser(email, nameVal);
+        NewUser user = new NewUser(email, nameVal, accNumVal, branchCodeVal);
         mDatabase.child("users").child(uidVal).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -153,5 +189,35 @@ public class UserDetailActivity extends AppCompatActivity {
         editor.commit();
 
         Log.d(TAG, "email, uid added in shared preference");
+    }
+
+    public void openMainActivity(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    public void openFriendsActivity(View view) {
+        startActivity(new Intent(this, FriendsActivity.class));
+        finish();
+    }
+
+    public void openQuickPayActivity(View view) {
+        startActivity(new Intent(this, QuickPayActivity.class));
+        finish();
+    }
+
+    public void openProfileActivity(View view) {
+        startActivity(new Intent(this, ProfileActivity.class));
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if(timesBackPressed < 1){
+            finish();
+        }
+        timesBackPressed -= 1;
+        Toast.makeText(this, "Press back one more time to exit.", Toast.LENGTH_SHORT).show();
     }
 }
