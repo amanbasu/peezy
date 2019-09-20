@@ -14,12 +14,16 @@ import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 class MyCustomAdapter extends BaseAdapter {
 
     private  ArrayList<String> mData;
     private LayoutInflater mInflater;
     private Context context;
+    private int[] avatars = {R.drawable.boy, R.drawable.boy1, R.drawable.boy2, R.drawable.man,
+                             R.drawable.girl};
+    Random gen = new Random();
 
     public MyCustomAdapter(Context context, ArrayList<String> results) {
         this.mData = results;
@@ -55,10 +59,15 @@ class MyCustomAdapter extends BaseAdapter {
 
         rowView = mInflater.inflate(R.layout.custom_grid_layout, null);
         holder.os_text = rowView.findViewById(R.id.textView);
+
         holder.os_img = rowView.findViewById(R.id.imageView);
 
-        holder.os_text.setText(mData.get(position));
-        holder.os_img.setImageResource(R.drawable.boy);
+        String name = mData.get(position);
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        int rnd = gen.nextInt(avatars.length);
+
+        holder.os_text.setText(name);
+        holder.os_img.setImageResource(avatars[rnd]);
 
         return rowView;
     }

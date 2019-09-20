@@ -41,7 +41,7 @@ import java.util.HashMap;
 
 public class FriendsActivity extends AppCompatActivity {
 
-    private int timesBackPressed = 2;
+    private int timesBackPressed = 1;
 
     private DatabaseReference mDatabase;
 
@@ -81,6 +81,7 @@ public class FriendsActivity extends AppCompatActivity {
 
     public void makeUI(){
 
+        Log.d(TAG, friendList.toString());
         MyCustomAdapter myCustomAdapter = new MyCustomAdapter(this, friendList);
         friendView.setAdapter(myCustomAdapter);
     }
@@ -126,7 +127,7 @@ public class FriendsActivity extends AppCompatActivity {
         friendList = new ArrayList<>();
         friendUIdList = new ArrayList<>();
 
-        mDatabase.child("users").child(myUId).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("friends").child(myUId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "checking stored users " + dataSnapshot.toString());

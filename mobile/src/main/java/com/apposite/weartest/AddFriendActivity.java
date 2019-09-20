@@ -116,6 +116,7 @@ public class AddFriendActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (validUId && validName){
                     saveDetails(name.getText().toString(), uid.getText().toString());
                 }
@@ -224,7 +225,7 @@ public class AddFriendActivity extends AppCompatActivity {
             uid.setError("The given UId is invalid.");
         }
 
-        mDatabase.child("users").child(myUId).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("friends").child(myUId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "checking stored users " + dataSnapshot.toString());
@@ -251,7 +252,7 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     private void checkValidName(final String nameVal){
-        mDatabase.child("users").child(myUId).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("friends").child(myUId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -259,7 +260,7 @@ public class AddFriendActivity extends AppCompatActivity {
                 validName = true;
 
                 for(DataSnapshot data: dataSnapshot.getChildren()){
-                    if (data.getKey().equals(nameVal)){
+                    if (data.getKey().equalsIgnoreCase(nameVal)){
                         validName = false;
                         name.setError("A person with this name already exists.");
                         break;
@@ -277,7 +278,7 @@ public class AddFriendActivity extends AppCompatActivity {
     private void saveDetails(final String mName, final String mUId) {
 
         Log.d(TAG, "Adding values: " + mName + ", " + mUId);
-        mDatabase.child("users").child(myUId).child("friends").child(mName).setValue(new Friends(mUId))
+        mDatabase.child("friends").child(myUId).child(mName).setValue(new Friends(mUId))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

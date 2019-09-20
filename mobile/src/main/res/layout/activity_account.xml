@@ -23,18 +23,35 @@
             android:textColor="#000000"
             android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="40dp"
-            android:autofillHints=""
-            android:fontFamily="monospace"
-            android:hint="@string/john_doe"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:autofillHints=""
+                android:fontFamily="monospace"
+                android:hint="@string/john_doe"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/ibAcMicName"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/news_report" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvUId"
@@ -71,12 +88,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="monospace"
                 android:text="@string/peezy"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp"/>
+
+            <ImageButton
+                android:id="@+id/ibAcMicUId"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/news_report" />
 
         </LinearLayout>
 
@@ -92,17 +120,34 @@
             android:textColor="#000000"
             android:textSize="24sp"/>
 
-        <EditText
-            android:id="@+id/etAccountNo"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="40dp"
-            android:hint="106 54356 234"
-            android:inputType="number"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etAccountNo"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:hint="106 54356 234"
+                android:inputType="number"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/ibAcMicAccNum"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/news_report" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvBranch"
@@ -115,16 +160,33 @@
             android:textColor="#000000"
             android:textSize="24sp"/>
 
-        <EditText
-            android:id="@+id/etBranch"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="40dp"
-            android:hint="HSBC0400112"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etBranch"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:hint="HSBC0400112"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="24sp" />
+
+            <ImageButton
+                android:id="@+id/ibAcMicBrCode"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/news_report" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

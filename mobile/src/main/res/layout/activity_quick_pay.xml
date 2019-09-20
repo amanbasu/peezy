@@ -44,8 +44,8 @@
 
     <EditText
         android:id="@+id/etQPAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:hint="10.00"
         android:inputType="numberDecimal"
@@ -53,10 +53,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btnQPPay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etQPUid"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintVertical_bias="0.491" />
 
     <ImageButton
         android:id="@+id/ibQPMicAmount"
@@ -260,5 +260,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQPUid"
         app:layout_constraintVertical_bias="0.212" />
+
+    <TextView
+        android:id="@+id/tvQPSymbol"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:fontFamily="monospace"
+        android:text="₹"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

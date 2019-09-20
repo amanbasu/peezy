@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements AIListener {
     private final String PAYMENT_INTENT = "payment";
     private final String RECEIVE_INTENT = "receive";
 
-    private int timesBackPressed = 2;
+    private int timesBackPressed = 1;
 
     private DatabaseReference mDatabase;
 
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements AIListener {
 
         friendList = new ArrayList<>();
 
-        mDatabase.child("users").child(myUId).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("friends").child(myUId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "checking stored users " + dataSnapshot.toString());

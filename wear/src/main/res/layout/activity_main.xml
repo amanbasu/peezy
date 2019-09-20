@@ -4,20 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="#ffffff"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding">
+        android:padding="@dimen/inner_frame_layout_padding"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btnGoogleSignIn"
+        <TextView
+            android:id="@+id/tvResponse"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:layout_margin="15dp"
+            android:text="Request $10 from John?\nJust say it."
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"/>
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRequest"
+                android:background="#FBDC7F"
+                android:text="Speak"
+                android:textColor="#362A29" />
+
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FBDC7F"
+                android:text="Confirm"
+                android:textColor="#362A29"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.wear.widget.BoxInsetLayout>

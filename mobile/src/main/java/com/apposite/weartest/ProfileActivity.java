@@ -18,10 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "log_cat";
-    private int timesBackPressed = 2;
+    private int timesBackPressed = 1;
 
     private ImageView imageQR;
     private TextView name, uid;
@@ -40,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         String myUId = sharedPref.getString("uid", "");
         String myName = sharedPref.getString("name", "");
 
-        String msg = "Hi " + myName + "! Find your QR code containing the Unique ID below ☟.";
+        String msg = "Hi " + myName + "! Find your QR code below " + getEmojiByUnicode(0x1F447);
 
         name.setText(msg);
         uid.setText(myUId);
@@ -54,6 +56,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         imageQR.setImageBitmap(qrBitmap);
+    }
+
+    public String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
     }
 
     Bitmap TextToImageEncode(String Value) throws WriterException {

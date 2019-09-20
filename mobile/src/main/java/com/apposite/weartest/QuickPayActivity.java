@@ -26,7 +26,7 @@ public class QuickPayActivity extends AppCompatActivity {
     private final int QR_REQUEST_CODE = 2;
     private final int MIC_AMOUNT_REQUEST_CODE = 3;
 
-    private int timesBackPressed = 2;
+    private int timesBackPressed = 1;
 
     EditText uid, amount;
     Button pay;
