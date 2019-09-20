@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements AIListener {
     private TextToSpeech mTextToSpeech;
 
     private final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 0;
-    private final String CLIENT_ACCESS_TOKEN = "e50e3f1fdf3d4b058056e90acc5c880e";
+    private final String CLIENT_ACCESS_TOKEN = "client-access-token";
     private final String TAG = "log_tag";
 
     private final String PAYMENT_INTENT = "payment";
